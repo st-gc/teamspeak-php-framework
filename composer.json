@@ -1,0 +1,15 @@
+{
+	"name": "st-gc/teamspeak-php-framework",
+	"description": "PHP 5.3+ TeamSpeak 3 Framework",
+	"license": "Apache 2",
+	"authors": [
+		{
+			"name": "Aaron Scherer",
+			"email": "aaron@st-gc.org"
+		}
+	],
+	"minimum-stability": "alpha",
+	"require": {
+		"php": ">=5.3"
+	}
+}

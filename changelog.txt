@@ -1,0 +1,11 @@
+===============================================================================
+                   TeamSpeak 3 PHP 5.3 Framework - Changelog
+                        http://www.st-gc.org
+===============================================================================
+   + Added feature or noticable improvement
+   - Bug fix or something removed
+   * Changed or Information
+   ! Important - Take note!
+===============================================================================
+=== Release 0.1.1 ===
+
