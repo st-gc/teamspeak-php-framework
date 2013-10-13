@@ -60,7 +60,7 @@ class Signal
 	{
 
 		if ( !$this->hasHandlers( $signal ) ) {
-			return;
+			return false;
 		}
 
 		if ( !is_array( $params ) ) {

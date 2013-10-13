@@ -10,6 +10,7 @@
 namespace TeamSpeak;
 
 use TeamSpeak\Model\String;
+use TeamSpeak\Model\Signal;
 
 /**
  * Enhanced exception class for TeamSpeak objects.
@@ -41,7 +42,7 @@ class Exception extends \Exception
 			$this->message = $this->prepareCustomMessage( self::$messages[ intval( $code ) ] );
 		}
 
-		TeamSpeak3_Helper_Signal::getInstance()->emit( "errorException", $this );
+		Signal::getInstance()->emit( "errorException", $this );
 	}
 
 	/**

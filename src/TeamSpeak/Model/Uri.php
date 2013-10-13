@@ -122,7 +122,9 @@ class Uri
 	/**
 	 * Parses the scheme-specific portion of the URI and place its parts into instance variables.
 	 *
-	 * @throws Exception
+	 * @param string $uriString
+	 *
+	 * @throws \TeamSpeak\Exception
 	 * @return void
 	 */
 	protected function parseUri( $uriString = '' )
@@ -403,7 +405,7 @@ class Uri
 		}
 
 		foreach ( $var as $key => $val ) {
-			$var[ $key ] = ( is_array( $val ) ) ? stripslashesRecursive( $val ) : stripslashes( strval( $val ) );
+			$var[ $key ] = ( is_array( $val ) ) ? self::stripslashesRecursive( $val ) : stripslashes( strval( $val ) );
 		}
 
 		return $var;
@@ -458,7 +460,7 @@ class Uri
 	public static function getBaseUri()
 	{
 
-		$scriptPath = new TeamSpeak3_Helper_String( dirname( self::getHostParam( "SCRIPT_NAME" ) ) );
+		$scriptPath = new String( dirname( self::getHostParam( "SCRIPT_NAME" ) ) );
 
 		return self::getHostUri()->append( ( $scriptPath == DIRECTORY_SEPARATOR ? "" : $scriptPath ) . "/" );
 	}
@@ -487,7 +489,7 @@ class Uri
 
 		$sheme = ( self::getHostParam( "HTTPS" ) == "on" ) ? "https" : "http";
 
-		$serverName = new TeamSpeak3_Helper_String( self::getHostParam( "HTTP_HOST" ) );
+		$serverName = new String( self::getHostParam( "HTTP_HOST" ) );
 		$serverPort = self::getHostParam( "SERVER_PORT" );
 		$serverPort = ( $serverPort != 80 && $serverPort != 443 ) ? ":" . $serverPort : "";
 
@@ -495,7 +497,7 @@ class Uri
 			$serverName = $serverName->replace( $serverPort, "" );
 		}
 
-		return new TeamSpeak3_Helper_String( $sheme . "://" . $serverName . $serverPort );
+		return new String( $sheme . "://" . $serverName . $serverPort );
 	}
 
 	/**
@@ -508,7 +510,7 @@ class Uri
 	public function getScheme( $default = null )
 	{
 
-		return ( $this->hasScheme() ) ? new TeamSpeak3_Helper_String( $this->scheme ) : $default;
+		return ( $this->hasScheme() ) ? new String( $this->scheme ) : $default;
 	}
 
 	/**
@@ -525,14 +527,14 @@ class Uri
 	/**
 	 * Returns the username.
 	 *
-	 * @param  mixed default
+	 * @param  mixed $default
 	 *
-	 * @return TeamSpeak3_Helper_String
+	 * @return String
 	 */
 	public function getUser( $default = null )
 	{
 
-		return ( $this->hasUser() ) ? new TeamSpeak3_Helper_String( $this->user ) : $default;
+		return ( $this->hasUser() ) ? new String( $this->user ) : $default;
 	}
 
 	/**
@@ -549,14 +551,14 @@ class Uri
 	/**
 	 * Returns the password.
 	 *
-	 * @param  mixed default
+	 * @param  mixed $default
 	 *
-	 * @return TeamSpeak3_Helper_String
+	 * @return String
 	 */
 	public function getPass( $default = null )
 	{
 
-		return ( $this->hasPass() ) ? new TeamSpeak3_Helper_String( $this->pass ) : $default;
+		return ( $this->hasPass() ) ? new String( $this->pass ) : $default;
 	}
 
 	/**
@@ -573,14 +575,14 @@ class Uri
 	/**
 	 * Returns the host.
 	 *
-	 * @param  mixed default
+	 * @param  mixed $default
 	 *
-	 * @return TeamSpeak3_Helper_String
+	 * @return String
 	 */
 	public function getHost( $default = null )
 	{
 
-		return ( $this->hasHost() ) ? new TeamSpeak3_Helper_String( $this->host ) : $default;
+		return ( $this->hasHost() ) ? new String( $this->host ) : $default;
 	}
 
 	/**
@@ -621,14 +623,14 @@ class Uri
 	/**
 	 * Returns the path.
 	 *
-	 * @param  mixed default
+	 * @param  mixed $default
 	 *
-	 * @return TeamSpeak3_Helper_String
+	 * @return String
 	 */
 	public function getPath( $default = null )
 	{
 
-		return ( $this->hasPath() ) ? new TeamSpeak3_Helper_String( $this->path ) : $default;
+		return ( $this->hasPath() ) ? new String( $this->path ) : $default;
 	}
 
 	/**
@@ -675,6 +677,8 @@ class Uri
 	/**
 	 * Returns TRUE if the URI has a query variable.
 	 *
+	 * @param $key
+	 *
 	 * @return boolean
 	 */
 	public function hasQueryVar( $key )
@@ -712,7 +716,7 @@ class Uri
 			if ( ctype_digit( $val ) ) {
 				return intval( $val );
 			} elseif ( is_string( $val ) ) {
-				return new TeamSpeak3_Helper_String( $val );
+				return new String( $val );
 			} else {
 				return $val;
 			}
@@ -724,14 +728,14 @@ class Uri
 	/**
 	 * Returns the fragment.
 	 *
-	 * @param  mixed default
+	 * @param  mixed $default
 	 *
-	 * @return TeamSpeak3_Helper_String
+	 * @return String
 	 */
 	public function getFragment( $default = null )
 	{
 
-		return ( $this->hasFragment() ) ? new TeamSpeak3_Helper_String( $this->fragment ) : $default;
+		return ( $this->hasFragment() ) ? new String( $this->fragment ) : $default;
 	}
 
 	/**

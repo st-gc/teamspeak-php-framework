@@ -8,6 +8,11 @@
 			"email": "aaron@st-gc.org"
 		}
 	],
+	"autoload":    {
+		"psr-0": {
+			"TeamSpeak": "src/"
+		}
+	},
 	"minimum-stability": "alpha",
 	"require": {
 		"php": ">=5.3"

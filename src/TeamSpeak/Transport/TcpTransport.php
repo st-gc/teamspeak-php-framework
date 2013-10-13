@@ -11,6 +11,7 @@ namespace TeamSpeak\Adapter;
 
 use TeamSpeak\Exception\TransportException;
 use TeamSpeak\Model\String;
+use TeamSpeak\Model\Signal;
 use TeamSpeak\Transport\AbstractTransport;
 
 /**
@@ -33,7 +34,7 @@ class TcpTransport extends AbstractTransport
 
 		$this->stream = null;
 
-		TeamSpeak3_Helper_Signal::getInstance()->emit( strtolower( $this->getAdapterType() ) . "Disconnected" );
+		Signal::getInstance()->emit( strtolower( $this->getAdapterType() ) . "Disconnected" );
 	}
 
 	/**
@@ -52,7 +53,7 @@ class TcpTransport extends AbstractTransport
 
 		$data = @stream_get_contents( $this->stream, $length );
 
-		TeamSpeak3_Helper_Signal::getInstance()->emit( strtolower( $this->getAdapterType() ) . "DataRead", $data );
+		Signal::getInstance()->emit( strtolower( $this->getAdapterType() ) . "DataRead", $data );
 
 		if ( $data === false ) {
 			throw new TransportException( "connection to server '" . $this->config[ "host" ] . ":" . $this->config[ "port" ] . "' lost" );
@@ -110,7 +111,7 @@ class TcpTransport extends AbstractTransport
 
 			$data = @fgets( $this->stream, 4096 );
 
-			TeamSpeak3_Helper_Signal::getInstance()->emit( strtolower( $this->getAdapterType() ) . "DataRead", $data );
+			Signal::getInstance()->emit( strtolower( $this->getAdapterType() ) . "DataRead", $data );
 
 			if ( $data === false ) {
 				if ( $line->count() ) {
@@ -168,6 +169,6 @@ class TcpTransport extends AbstractTransport
 
 		@stream_socket_sendto( $this->stream, $data );
 
-		TeamSpeak3_Helper_Signal::getInstance()->emit( strtolower( $this->getAdapterType() ) . "DataSend", $data );
+		Signal::getInstance()->emit( strtolower( $this->getAdapterType() ) . "DataSend", $data );
 	}
 }

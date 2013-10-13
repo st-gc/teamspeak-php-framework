@@ -362,4 +362,9 @@ class Constant
 		"\v" => "\\v" // vertical tab
 	);
 
+	public static function getEscapePatterns()
+	{
+		return self::$escape_patterns;
+	}
+
 }

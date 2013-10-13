@@ -12,6 +12,7 @@ namespace TeamSpeak\Transport;
 use TeamSpeak\Adapter\AbstractAdapter;
 use TeamSpeak\Exception\TransportException;
 use TeamSpeak\Model\String;
+use TeamSpeak\Model\Signal;
 
 /**
  * @class AbstractTransport
@@ -220,7 +221,7 @@ abstract class AbstractTransport
 			$null = null;
 
 			if ( $time ) {
-				TeamSpeak3_Helper_Signal::getInstance()->emit(
+				Signal::getInstance()->emit(
 					strtolower( $this->getAdapterType() ) . "WaitTimeout",
 					$time,
 					$this->getAdapter()

@@ -11,6 +11,7 @@ namespace TeamSpeak\Adapter;
 
 use TeamSpeak\Exception\TransportException;
 use TeamSpeak\Model\String;
+use TeamSpeak\Model\Signal;
 use TeamSpeak\Transport\AbstractTransport;
 
 /**
@@ -34,7 +35,7 @@ class UdpTransport extends AbstractTransport
 
 		$this->stream = null;
 
-		TeamSpeak3_Helper_Signal::getInstance()->emit( strtolower( $this->getAdapterType() ) . "Disconnected" );
+		Signal::getInstance()->emit( strtolower( $this->getAdapterType() ) . "Disconnected" );
 	}
 
 	/**
@@ -53,7 +54,7 @@ class UdpTransport extends AbstractTransport
 
 		$data = @fread( $this->stream, $length );
 
-		TeamSpeak3_Helper_Signal::getInstance()->emit( strtolower( $this->getAdapterType() ) . "DataRead", $data );
+		Signal::getInstance()->emit( strtolower( $this->getAdapterType() ) . "DataRead", $data );
 
 		if ( $data === false ) {
 			throw new TransportException( "connection to server '" . $this->config[ "host" ] . ":" . $this->config[ "port" ] . "' lost" );
@@ -105,6 +106,6 @@ class UdpTransport extends AbstractTransport
 
 		@stream_socket_sendto( $this->stream, $data );
 
-		TeamSpeak3_Helper_Signal::getInstance()->emit( strtolower( $this->getAdapterType() ) . "DataSend", $data );
+		Signal::getInstance()->emit( strtolower( $this->getAdapterType() ) . "DataSend", $data );
 	}
 }
