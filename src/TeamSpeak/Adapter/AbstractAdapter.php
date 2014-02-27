@@ -10,6 +10,11 @@
 namespace TeamSpeak\Adapter;
 
 use TeamSpeak\Exception\AdapterException;
+<<<<<<< HEAD
+=======
+use TeamSpeak\Helper\Profiler;
+use TeamSpeak\Helper\Profiler\Timer;
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 use TeamSpeak\Transport\AbstractTransport;
 
 /**
@@ -45,7 +50,11 @@ abstract class AbstractAdapter
 
 		$this->options = $options;
 
+<<<<<<< HEAD
 		if( $this->transport === null ) {
+=======
+		if ( $this->transport === null ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			$this->syn();
 		}
 	}
@@ -91,12 +100,20 @@ abstract class AbstractAdapter
 	/**
 	 * Returns the profiler timer used for this connection adapter.
 	 *
+<<<<<<< HEAD
 	 * @return TeamSpeak3_Helper_Profiler_Timer
+=======
+	 * @return Timer
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	 */
 	public function getProfiler()
 	{
 
+<<<<<<< HEAD
 		return TeamSpeak3_Helper_Profiler::get( spl_object_hash( $this ) );
+=======
+		return Profiler::get( spl_object_hash( $this ) );
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	}
 
 	/**
@@ -147,12 +164,20 @@ abstract class AbstractAdapter
 	protected function initTransport( $options, $transport = "Tcp" )
 	{
 
+<<<<<<< HEAD
 		if( !is_array( $options ) ) {
+=======
+		if ( !is_array( $options ) ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			throw new AdapterException( "transport parameters must provided in an array" );
 		}
 
 		$class = sprintf( '\TeamSpeak\Transport\%sTransport', ucwords( strtolower( $transport ) ) );
+<<<<<<< HEAD
 		if( !class_exists( $class ) ) {
+=======
+		if ( !class_exists( $class ) ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			throw new AdapterException( "Transport {$transport} does not exist." );
 		}
 

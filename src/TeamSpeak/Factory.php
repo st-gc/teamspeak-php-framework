@@ -9,13 +9,28 @@
  */
 namespace TeamSpeak;
 
+<<<<<<< HEAD
+=======
+use TeamSpeak\Adapter\ServerQueryAdapter;
+use TeamSpeak\Helper\Profiler;
+use TeamSpeak\Node\AbstractNode;
+use TeamSpeak\Node\ServerNode;
+use TeamSpeak\Adapter\AbstractAdapter;
+
+use TeamSpeak\Exception\AdapterException;
+
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 /**
  * Factory class all for TeamSpeak 3 PHP Framework objects.
  */
 class Factory
 {
 	/**
+<<<<<<< HEAD
 	 * Factory for TeamSpeak3_Adapter_Abstract classes. $uri must be formatted as
+=======
+	 * Factory for AbstractAdapter classes. $uri must be formatted as
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	 * "<adapter>://<user>:<pass>@<host>:<port>/<options>#<flags>". All parameters
 	 * except adapter, host and port are optional.
 	 *
@@ -46,10 +61,18 @@ class Factory
 	 *
 	 * @param  string $uri
 	 *
+<<<<<<< HEAD
 	 * @return TeamSpeak3_Adapter_Abstract
 	 * @return TeamSpeak3_Node_Abstract
 	 */
 	public static function factory( $uri )
+=======
+	 * @throws Exception\AdapterException
+	 * @return AbstractAdapter
+	 * @return \TeamSpeak\Adapter\AbstractAdapter
+	 */
+	public static function create( $uri )
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	{
 
 		self::init();
@@ -57,6 +80,7 @@ class Factory
 		$uri = new Model\Uri( $uri );
 
 		$adapter = self::getAdapterName( $uri->getScheme() );
+<<<<<<< HEAD
 		$options = array( "host"     => $uri->getHost(),
 		                  "port"     => $uri->getPort(),
 		                  "timeout"  => intval( $uri->getQueryVar( "timeout", 10 ) ),
@@ -71,36 +95,79 @@ class Factory
 			$node = $object->getHost();
 
 			if( $uri->hasUser() && $uri->hasPass() ) {
+=======
+		$options = array(
+			"host"     => $uri->getHost(),
+			"port"     => $uri->getPort(),
+			"timeout"  => intval( $uri->getQueryVar( "timeout", 10 ) ),
+			"blocking" => intval( $uri->getQueryVar( "blocking", 1 ) )
+		);
+
+		$className = sprintf( '\TeamSpeak\Adapter\%sAdapter', ucwords( strtolower( $adapter ) ) );
+		if( !class_exists( $className ) ) {
+			throw new AdapterException( "Adapter {$className} does not exist." );
+		}
+
+		$adapter = new $className( $options );
+
+		if ( $adapter instanceof ServerQueryAdapter ) {
+			$node = $adapter->getHost();
+
+			if ( $uri->hasUser() && $uri->hasPass() ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 				$node->login( $uri->getUser(), $uri->getPass() );
 			}
 
 			/* option to pre-define nickname */
+<<<<<<< HEAD
 			if( $uri->hasQueryVar( "nickname" ) ) {
+=======
+			if ( $uri->hasQueryVar( "nickname" ) ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 				$node->setPredefinedQueryName( $uri->getQueryVar( "nickname" ) );
 			}
 
 			/* flag to use offline servers in virtual mode */
+<<<<<<< HEAD
 			if( $uri->getFragment() == "use_offline_as_virtual" ) {
 				$node->setUseOfflineAsVirtual( true );
 			} elseif( $uri->hasQueryVar( "use_offline_as_virtual" ) ) {
+=======
+			if ( $uri->getFragment() == "use_offline_as_virtual" ) {
+				$node->setUseOfflineAsVirtual( true );
+			} elseif ( $uri->hasQueryVar( "use_offline_as_virtual" ) ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 				$node->setUseOfflineAsVirtual( $uri->getQueryVar( "use_offline_as_virtual" ) ? true : false );
 			}
 
 			/* flag to fetch clients before sub-channels */
+<<<<<<< HEAD
 			if( $uri->getFragment() == "clients_before_channels" ) {
 				$node->setLoadClientlistFirst( true );
 			} elseif( $uri->hasQueryVar( "clients_before_channels" ) ) {
+=======
+			if ( $uri->getFragment() == "clients_before_channels" ) {
+				$node->setLoadClientlistFirst( true );
+			} elseif ( $uri->hasQueryVar( "clients_before_channels" ) ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 				$node->setLoadClientlistFirst( $uri->getQueryVar( "clients_before_channels" ) ? true : false );
 			}
 
 			/* flag to hide ServerQuery clients */
+<<<<<<< HEAD
 			if( $uri->getFragment() == "no_query_clients" ) {
 				$node->setExcludeQueryClients( true );
 			} elseif( $uri->hasQueryVar( "no_query_clients" ) ) {
+=======
+			if ( $uri->getFragment() == "no_query_clients" ) {
+				$node->setExcludeQueryClients( true );
+			} elseif ( $uri->hasQueryVar( "no_query_clients" ) ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 				$node->setExcludeQueryClients( $uri->getQueryVar( "no_query_clients" ) ? true : false );
 			}
 
 			/* access server node object */
+<<<<<<< HEAD
 			if( $uri->hasQueryVar( "server_id" ) ) {
 				$node = $node->serverGetById( $uri->getQueryVar( "server_id" ) );
 			} elseif( $uri->hasQueryVar( "server_uid" ) ) {
@@ -110,25 +177,53 @@ class Factory
 			} elseif( $uri->hasQueryVar( "server_name" ) ) {
 				$node = $node->serverGetByName( $uri->getQueryVar( "server_name" ) );
 			} elseif( $uri->hasQueryVar( "server_tsdns" ) ) {
+=======
+			if ( $uri->hasQueryVar( "server_id" ) ) {
+				$node = $node->serverGetById( $uri->getQueryVar( "server_id" ) );
+			} elseif ( $uri->hasQueryVar( "server_uid" ) ) {
+				$node = $node->serverGetByUid( $uri->getQueryVar( "server_uid" ) );
+			} elseif ( $uri->hasQueryVar( "server_port" ) ) {
+				$node = $node->serverGetByPort( $uri->getQueryVar( "server_port" ) );
+			} elseif ( $uri->hasQueryVar( "server_name" ) ) {
+				$node = $node->serverGetByName( $uri->getQueryVar( "server_name" ) );
+			} elseif ( $uri->hasQueryVar( "server_tsdns" ) ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 				$node = $node->serverGetByTSDNS( $uri->getQueryVar( "server_tsdns" ) );
 			}
 
 			/* direct access to node objects */
+<<<<<<< HEAD
 			if( $node instanceof TeamSpeak3_Node_Server ) {
 				/* access channel node object */
 				if( $uri->hasQueryVar( "channel_id" ) ) {
 					$node = $node->channelGetById( $uri->getQueryVar( "channel_id" ) );
 				} elseif( $uri->hasQueryVar( "channel_name" ) ) {
+=======
+			if ( $node instanceof ServerNode ) {
+				/* access channel node object */
+				if ( $uri->hasQueryVar( "channel_id" ) ) {
+					$node = $node->channelGetById( $uri->getQueryVar( "channel_id" ) );
+				} elseif ( $uri->hasQueryVar( "channel_name" ) ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 					$node = $node->channelGetByName( $uri->getQueryVar( "channel_name" ) );
 				}
 
 				/* access client node object */
+<<<<<<< HEAD
 				if( $uri->hasQueryVar( "client_id" ) ) {
 					$node = $node->clientGetById( $uri->getQueryVar( "client_id" ) );
 				}
 				if( $uri->hasQueryVar( "client_uid" ) ) {
 					$node = $node->clientGetByUid( $uri->getQueryVar( "client_uid" ) );
 				} elseif( $uri->hasQueryVar( "client_name" ) ) {
+=======
+				if ( $uri->hasQueryVar( "client_id" ) ) {
+					$node = $node->clientGetById( $uri->getQueryVar( "client_id" ) );
+				}
+				if ( $uri->hasQueryVar( "client_uid" ) ) {
+					$node = $node->clientGetByUid( $uri->getQueryVar( "client_uid" ) );
+				} elseif ( $uri->hasQueryVar( "client_name" ) ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 					$node = $node->clientGetByName( $uri->getQueryVar( "client_name" ) );
 				}
 			}
@@ -136,18 +231,27 @@ class Factory
 			return $node;
 		}
 
+<<<<<<< HEAD
 		return $object;
+=======
+		return $adapter;
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	}
 
 	/**
 	 * Checks for required PHP features, enables autoloading and starts a default profiler.
 	 *
+<<<<<<< HEAD
 	 * @throws LogicException
+=======
+	 * @throws \LogicException
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	 * @return void
 	 */
 	public static function init()
 	{
 
+<<<<<<< HEAD
 		if( version_compare( phpversion(), "5.2.1" ) == -1 ) {
 			throw new LogicException( "this particular software cannot be used with the installed version of PHP" );
 		}
@@ -696,3 +800,16 @@ class Factory
  *
  * Speed up new development and reduce maintenance costs by using the TS3 PHP Framework!
  */
+=======
+		if ( version_compare( phpversion(), "5.3.1" ) == -1 ) {
+			throw new \LogicException( "this particular software cannot be used with the installed version of PHP" );
+		}
+
+		if ( !function_exists( "stream_socket_client" ) ) {
+			throw new \LogicException( "network functions are not available in this PHP installation" );
+		}
+
+		Profiler::start();
+	}
+}
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8

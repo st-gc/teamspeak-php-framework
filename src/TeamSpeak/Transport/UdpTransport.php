@@ -11,6 +11,10 @@ namespace TeamSpeak\Adapter;
 
 use TeamSpeak\Exception\TransportException;
 use TeamSpeak\Model\String;
+<<<<<<< HEAD
+=======
+use TeamSpeak\Model\Signal;
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 use TeamSpeak\Transport\AbstractTransport;
 
 /**
@@ -28,13 +32,21 @@ class UdpTransport extends AbstractTransport
 	public function disconnect()
 	{
 
+<<<<<<< HEAD
 		if( $this->stream === null ) {
+=======
+		if ( $this->stream === null ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			return;
 		}
 
 		$this->stream = null;
 
+<<<<<<< HEAD
 		TeamSpeak3_Helper_Signal::getInstance()->emit( strtolower( $this->getAdapterType() ) . "Disconnected" );
+=======
+		Signal::getInstance()->emit( strtolower( $this->getAdapterType() ) . "Disconnected" );
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	}
 
 	/**
@@ -53,9 +65,15 @@ class UdpTransport extends AbstractTransport
 
 		$data = @fread( $this->stream, $length );
 
+<<<<<<< HEAD
 		TeamSpeak3_Helper_Signal::getInstance()->emit( strtolower( $this->getAdapterType() ) . "DataRead", $data );
 
 		if( $data === false ) {
+=======
+		Signal::getInstance()->emit( strtolower( $this->getAdapterType() ) . "DataRead", $data );
+
+		if ( $data === false ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			throw new TransportException( "connection to server '" . $this->config[ "host" ] . ":" . $this->config[ "port" ] . "' lost" );
 		}
 
@@ -71,7 +89,13 @@ class UdpTransport extends AbstractTransport
 	public function connect()
 	{
 
+<<<<<<< HEAD
 		if( $this->stream !== null ) return;
+=======
+		if ( $this->stream !== null ) {
+			return;
+		}
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 
 		$host = strval( $this->config[ "host" ] );
 		$port = strval( $this->config[ "port" ] );
@@ -81,7 +105,11 @@ class UdpTransport extends AbstractTransport
 
 		$this->stream = @stream_socket_client( $address, $errno, $errstr, $timeout );
 
+<<<<<<< HEAD
 		if( $this->stream === false ) {
+=======
+		if ( $this->stream === false ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			throw new TransportException( String::factory( $errstr )->toUtf8()->toString(), $errno );
 		}
 
@@ -103,6 +131,10 @@ class UdpTransport extends AbstractTransport
 
 		@stream_socket_sendto( $this->stream, $data );
 
+<<<<<<< HEAD
 		TeamSpeak3_Helper_Signal::getInstance()->emit( strtolower( $this->getAdapterType() ) . "DataSend", $data );
+=======
+		Signal::getInstance()->emit( strtolower( $this->getAdapterType() ) . "DataSend", $data );
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	}
 }

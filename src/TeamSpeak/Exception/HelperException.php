@@ -12,12 +12,9 @@ namespace TeamSpeak\Exception;
 use TeamSpeak\Exception;
 
 /**
- * Enhanced exception class for TeamSpeak objects.
+ * @class TeamSpeak3_Helper_Exception
+ * @brief Enhanced exception class for TeamSpeak3_Helper_* objects.
  */
-<<<<<<< HEAD
-class TransportException extends Exception { }
-=======
-class TransportException extends Exception
+class HelperException extends Exception
 {
 }
->>>>>>> f7b249fce37146989d856c68805f7af6899819e8

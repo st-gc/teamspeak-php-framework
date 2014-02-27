@@ -10,6 +10,10 @@
 namespace TeamSpeak;
 
 use TeamSpeak\Model\String;
+<<<<<<< HEAD
+=======
+use TeamSpeak\Model\Signal;
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 
 /**
  * Enhanced exception class for TeamSpeak objects.
@@ -37,11 +41,19 @@ class Exception extends \Exception
 
 		parent::__construct( $msg, $code );
 
+<<<<<<< HEAD
 		if( array_key_exists( (int)$code, self::$messages ) ) {
 			$this->message = $this->prepareCustomMessage( self::$messages[ intval( $code ) ] );
 		}
 
 		TeamSpeak3_Helper_Signal::getInstance()->emit( "errorException", $this );
+=======
+		if ( array_key_exists( (int)$code, self::$messages ) ) {
+			$this->message = $this->prepareCustomMessage( self::$messages[ intval( $code ) ] );
+		}
+
+		Signal::getInstance()->emit( "errorException", $this );
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	}
 
 	/**
@@ -76,11 +88,19 @@ class Exception extends \Exception
 	public static function registerCustomMessage( $code, $msg )
 	{
 
+<<<<<<< HEAD
 		if( array_key_exists( (int)$code, self::$messages ) ) {
 			throw new self( "custom message for code 0x" . strtoupper( dechex( $code ) ) . " is already registered" );
 		}
 
 		if( !is_string( $msg ) ) {
+=======
+		if ( array_key_exists( (int)$code, self::$messages ) ) {
+			throw new self( "custom message for code 0x" . strtoupper( dechex( $code ) ) . " is already registered" );
+		}
+
+		if ( !is_string( $msg ) ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			throw new self( "custom message for code 0x" . strtoupper( dechex( $code ) ) . " must be a string" );
 		}
 
@@ -98,7 +118,11 @@ class Exception extends \Exception
 	public static function unregisterCustomMessage( $code )
 	{
 
+<<<<<<< HEAD
 		if( !array_key_exists( (int)$code, self::$messages ) ) {
+=======
+		if ( !array_key_exists( (int)$code, self::$messages ) ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			throw new self( "custom message for code 0x" . strtoupper( dechex( $code ) ) . " is not registered" );
 		}
 

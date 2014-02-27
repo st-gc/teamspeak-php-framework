@@ -96,7 +96,11 @@ class Uri
 		$this->scheme = strtolower( $uri[ 0 ] );
 		$uriString    = isset( $uri[ 1 ] ) ? $uri[ 1 ] : "";
 
+<<<<<<< HEAD
 		if( !ctype_alnum( $this->scheme ) ) {
+=======
+		if ( !ctype_alnum( $this->scheme ) ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			throw new Exception( "invalid URI scheme '" . $this->scheme . "' supplied" );
 		}
 
@@ -110,11 +114,19 @@ class Uri
 		$this->regex[ "path" ]       = "(?:\/" . $this->regex[ "segment" ] . "?)+";
 		$this->regex[ "uric" ]       = "(?:" . $this->regex[ "reserved" ] . "|" . $this->regex[ "unreserved" ] . "|" . $this->regex[ "escaped" ] . ")";
 
+<<<<<<< HEAD
 		if( strlen( $uriString ) > 0 ) {
 			$this->parseUri( $uriString );
 		}
 
 		if( !$this->isValid() ) {
+=======
+		if ( strlen( $uriString ) > 0 ) {
+			$this->parseUri( $uriString );
+		}
+
+		if ( !$this->isValid() ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			throw new Exception( "invalid URI supplied" );
 		}
 	}
@@ -122,7 +134,13 @@ class Uri
 	/**
 	 * Parses the scheme-specific portion of the URI and place its parts into instance variables.
 	 *
+<<<<<<< HEAD
 	 * @throws Exception
+=======
+	 * @param string $uriString
+	 *
+	 * @throws \TeamSpeak\Exception
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	 * @return void
 	 */
 	protected function parseUri( $uriString = '' )
@@ -130,11 +148,19 @@ class Uri
 
 		$status = @preg_match( "~^((//)([^/?#]*))([^?#]*)(\?([^#]*))?(#(.*))?$~", $uriString, $matches );
 
+<<<<<<< HEAD
 		if( $status === false ) {
 			throw new Exception( "URI scheme-specific decomposition failed" );
 		}
 
 		if( !$status ) {
+=======
+		if ( $status === false ) {
+			throw new Exception( "URI scheme-specific decomposition failed" );
+		}
+
+		if ( !$status ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			return;
 		}
 
@@ -148,11 +174,21 @@ class Uri
 			$matches
 		);
 
+<<<<<<< HEAD
 		if( $status === false ) {
 			throw new Exception( "URI scheme-specific authority decomposition failed" );
 		}
 
 		if( !$status ) return;
+=======
+		if ( $status === false ) {
+			throw new Exception( "URI scheme-specific authority decomposition failed" );
+		}
+
+		if ( !$status ) {
+			return;
+		}
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 
 		$this->user = isset( $matches[ 2 ] ) ? $matches[ 2 ] : "";
 		$this->pass = isset( $matches[ 4 ] ) ? $matches[ 4 ] : "";
@@ -168,8 +204,13 @@ class Uri
 	public function isValid()
 	{
 
+<<<<<<< HEAD
 		return ( $this->checkUser() && $this->checkPass() && $this->checkHost() && $this->checkPort() && $this->checkPath(
 			) && $this->checkQuery() && $this->checkFragment() );
+=======
+		return ( $this->checkUser() && $this->checkPass() && $this->checkHost() && $this->checkPort(
+			) && $this->checkPath() && $this->checkQuery() && $this->checkFragment() );
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	}
 
 	/**
@@ -183,18 +224,30 @@ class Uri
 	public function checkUser( $username = null )
 	{
 
+<<<<<<< HEAD
 		if( $username === null ) {
 			$username = $this->user;
 		}
 
 		if( strlen( $username ) == 0 ) {
+=======
+		if ( $username === null ) {
+			$username = $this->user;
+		}
+
+		if ( strlen( $username ) == 0 ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			return true;
 		}
 
 		$pattern = "/^(" . $this->regex[ "alphanum" ] . "|" . $this->regex[ "mark" ] . "|" . $this->regex[ "escaped" ] . "|[;:&=+$,])+$/";
 		$status  = @preg_match( $pattern, $username );
 
+<<<<<<< HEAD
 		if( $status === false ) {
+=======
+		if ( $status === false ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			throw new Exception( "URI username validation failed" );
 		}
 
@@ -212,18 +265,30 @@ class Uri
 	public function checkPass( $password = null )
 	{
 
+<<<<<<< HEAD
 		if( $password === null ) {
 			$password = $this->pass;
 		}
 
 		if( strlen( $password ) == 0 ) {
+=======
+		if ( $password === null ) {
+			$password = $this->pass;
+		}
+
+		if ( strlen( $password ) == 0 ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			return true;
 		}
 
 		$pattern = "/^(" . $this->regex[ "alphanum" ] . "|" . $this->regex[ "mark" ] . "|" . $this->regex[ "escaped" ] . "|[;:&=+$,])+$/";
 		$status  = @preg_match( $pattern, $password );
 
+<<<<<<< HEAD
 		if( $status === false ) {
+=======
+		if ( $status === false ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			throw new Exception( "URI password validation failed" );
 		}
 
@@ -240,7 +305,11 @@ class Uri
 	public function checkHost( $host = null )
 	{
 
+<<<<<<< HEAD
 		if( $host === null ) {
+=======
+		if ( $host === null ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			$host = $this->host;
 		}
 
@@ -257,7 +326,11 @@ class Uri
 	public function checkPort( $port = null )
 	{
 
+<<<<<<< HEAD
 		if( $port === null ) {
+=======
+		if ( $port === null ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			$port = $this->port;
 		}
 
@@ -275,18 +348,30 @@ class Uri
 	public function checkPath( $path = null )
 	{
 
+<<<<<<< HEAD
 		if( $path === null ) {
 			$path = $this->path;
 		}
 
 		if( strlen( $path ) == 0 ) {
+=======
+		if ( $path === null ) {
+			$path = $this->path;
+		}
+
+		if ( strlen( $path ) == 0 ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			return true;
 		}
 
 		$pattern = "/^" . $this->regex[ "path" ] . "$/";
 		$status  = @preg_match( $pattern, $path );
 
+<<<<<<< HEAD
 		if( $status === false ) {
+=======
+		if ( $status === false ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			throw new Exception( "URI path validation failed" );
 		}
 
@@ -304,18 +389,30 @@ class Uri
 	public function checkQuery( $query = null )
 	{
 
+<<<<<<< HEAD
 		if( $query === null ) {
 			$query = $this->query;
 		}
 
 		if( strlen( $query ) == 0 ) {
+=======
+		if ( $query === null ) {
+			$query = $this->query;
+		}
+
+		if ( strlen( $query ) == 0 ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			return true;
 		}
 
 		$pattern = "/^" . $this->regex[ "uric" ] . "*$/";
 		$status  = @preg_match( $pattern, $query );
 
+<<<<<<< HEAD
 		if( $status === false ) {
+=======
+		if ( $status === false ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			throw new Exception( "URI query string validation failed" );
 		}
 
@@ -333,18 +430,30 @@ class Uri
 	public function checkFragment( $fragment = null )
 	{
 
+<<<<<<< HEAD
 		if( $fragment === null ) {
 			$fragment = $this->fragment;
 		}
 
 		if( strlen( $fragment ) == 0 ) {
+=======
+		if ( $fragment === null ) {
+			$fragment = $this->fragment;
+		}
+
+		if ( strlen( $fragment ) == 0 ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			return true;
 		}
 
 		$pattern = "/^" . $this->regex[ "uric" ] . "*$/";
 		$status  = @preg_match( $pattern, $fragment );
 
+<<<<<<< HEAD
 		if( $status === false ) {
+=======
+		if ( $status === false ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			throw new Exception( "URI fragment validation failed" );
 		}
 
@@ -363,7 +472,11 @@ class Uri
 
 		try {
 			$uri = new self( strval( $uri ) );
+<<<<<<< HEAD
 		} catch( Exception $e ) {
+=======
+		} catch ( Exception $e ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			return false;
 		}
 
@@ -396,12 +509,21 @@ class Uri
 	protected static function stripslashesRecursive( $var )
 	{
 
+<<<<<<< HEAD
 		if( !is_array( $var ) ) {
 			return stripslashes( strval( $var ) );
 		}
 
 		foreach( $var as $key => $val ) {
 			$var[ $key ] = ( is_array( $val ) ) ? stripslashesRecursive( $val ) : stripslashes( strval( $val ) );
+=======
+		if ( !is_array( $var ) ) {
+			return stripslashes( strval( $var ) );
+		}
+
+		foreach ( $var as $key => $val ) {
+			$var[ $key ] = ( is_array( $val ) ) ? self::stripslashesRecursive( $val ) : stripslashes( strval( $val ) );
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 		}
 
 		return $var;
@@ -432,7 +554,11 @@ class Uri
 	public static function getFQDNParts( $hostname )
 	{
 
+<<<<<<< HEAD
 		if( !preg_match(
+=======
+		if ( !preg_match(
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			"/^([a-z0-9][a-z0-9-]{0,62}\.)*([a-z0-9][a-z0-9-]{0,62}\.)+([a-z]{2,6})$/i",
 			$hostname,
 			$matches
@@ -456,7 +582,11 @@ class Uri
 	public static function getBaseUri()
 	{
 
+<<<<<<< HEAD
 		$scriptPath = new TeamSpeak3_Helper_String( dirname( self::getHostParam( "SCRIPT_NAME" ) ) );
+=======
+		$scriptPath = new String( dirname( self::getHostParam( "SCRIPT_NAME" ) ) );
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 
 		return self::getHostUri()->append( ( $scriptPath == DIRECTORY_SEPARATOR ? "" : $scriptPath ) . "/" );
 	}
@@ -485,6 +615,7 @@ class Uri
 
 		$sheme = ( self::getHostParam( "HTTPS" ) == "on" ) ? "https" : "http";
 
+<<<<<<< HEAD
 		$serverName = new TeamSpeak3_Helper_String( self::getHostParam( "HTTP_HOST" ) );
 		$serverPort = self::getHostParam( "SERVER_PORT" );
 		$serverPort = ( $serverPort != 80 && $serverPort != 443 ) ? ":" . $serverPort : "";
@@ -494,6 +625,17 @@ class Uri
 		}
 
 		return new TeamSpeak3_Helper_String( $sheme . "://" . $serverName . $serverPort );
+=======
+		$serverName = new String( self::getHostParam( "HTTP_HOST" ) );
+		$serverPort = self::getHostParam( "SERVER_PORT" );
+		$serverPort = ( $serverPort != 80 && $serverPort != 443 ) ? ":" . $serverPort : "";
+
+		if ( $serverName->endsWith( $serverPort ) ) {
+			$serverName = $serverName->replace( $serverPort, "" );
+		}
+
+		return new String( $sheme . "://" . $serverName . $serverPort );
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	}
 
 	/**
@@ -506,7 +648,11 @@ class Uri
 	public function getScheme( $default = null )
 	{
 
+<<<<<<< HEAD
 		return ( $this->hasScheme() ) ? new TeamSpeak3_Helper_String( $this->scheme ) : $default;
+=======
+		return ( $this->hasScheme() ) ? new String( $this->scheme ) : $default;
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	}
 
 	/**
@@ -523,14 +669,24 @@ class Uri
 	/**
 	 * Returns the username.
 	 *
+<<<<<<< HEAD
 	 * @param  mixed default
 	 *
 	 * @return TeamSpeak3_Helper_String
+=======
+	 * @param  mixed $default
+	 *
+	 * @return String
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	 */
 	public function getUser( $default = null )
 	{
 
+<<<<<<< HEAD
 		return ( $this->hasUser() ) ? new TeamSpeak3_Helper_String( $this->user ) : $default;
+=======
+		return ( $this->hasUser() ) ? new String( $this->user ) : $default;
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	}
 
 	/**
@@ -547,14 +703,24 @@ class Uri
 	/**
 	 * Returns the password.
 	 *
+<<<<<<< HEAD
 	 * @param  mixed default
 	 *
 	 * @return TeamSpeak3_Helper_String
+=======
+	 * @param  mixed $default
+	 *
+	 * @return String
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	 */
 	public function getPass( $default = null )
 	{
 
+<<<<<<< HEAD
 		return ( $this->hasPass() ) ? new TeamSpeak3_Helper_String( $this->pass ) : $default;
+=======
+		return ( $this->hasPass() ) ? new String( $this->pass ) : $default;
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	}
 
 	/**
@@ -571,14 +737,24 @@ class Uri
 	/**
 	 * Returns the host.
 	 *
+<<<<<<< HEAD
 	 * @param  mixed default
 	 *
 	 * @return TeamSpeak3_Helper_String
+=======
+	 * @param  mixed $default
+	 *
+	 * @return String
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	 */
 	public function getHost( $default = null )
 	{
 
+<<<<<<< HEAD
 		return ( $this->hasHost() ) ? new TeamSpeak3_Helper_String( $this->host ) : $default;
+=======
+		return ( $this->hasHost() ) ? new String( $this->host ) : $default;
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	}
 
 	/**
@@ -619,14 +795,24 @@ class Uri
 	/**
 	 * Returns the path.
 	 *
+<<<<<<< HEAD
 	 * @param  mixed default
 	 *
 	 * @return TeamSpeak3_Helper_String
+=======
+	 * @param  mixed $default
+	 *
+	 * @return String
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	 */
 	public function getPath( $default = null )
 	{
 
+<<<<<<< HEAD
 		return ( $this->hasPath() ) ? new TeamSpeak3_Helper_String( $this->path ) : $default;
+=======
+		return ( $this->hasPath() ) ? new String( $this->path ) : $default;
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	}
 
 	/**
@@ -650,7 +836,11 @@ class Uri
 	public function getQuery( $default = array() )
 	{
 
+<<<<<<< HEAD
 		if( !$this->hasQuery() ) {
+=======
+		if ( !$this->hasQuery() ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			return $default;
 		}
 
@@ -673,12 +863,23 @@ class Uri
 	/**
 	 * Returns TRUE if the URI has a query variable.
 	 *
+<<<<<<< HEAD
+=======
+	 * @param $key
+	 *
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	 * @return boolean
 	 */
 	public function hasQueryVar( $key )
 	{
 
+<<<<<<< HEAD
 		if( !$this->hasQuery() ) return false;
+=======
+		if ( !$this->hasQuery() ) {
+			return false;
+		}
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 
 		parse_str( $this->query, $queryArray );
 
@@ -696,6 +897,7 @@ class Uri
 	public function getQueryVar( $key, $default = null )
 	{
 
+<<<<<<< HEAD
 		if( !$this->hasQuery() ) return $default;
 
 		parse_str( $this->query, $queryArray );
@@ -707,6 +909,21 @@ class Uri
 				return intval( $val );
 			} elseif( is_string( $val ) ) {
 				return new TeamSpeak3_Helper_String( $val );
+=======
+		if ( !$this->hasQuery() ) {
+			return $default;
+		}
+
+		parse_str( $this->query, $queryArray );
+
+		if ( array_key_exists( $key, $queryArray ) ) {
+			$val = $queryArray[ $key ];
+
+			if ( ctype_digit( $val ) ) {
+				return intval( $val );
+			} elseif ( is_string( $val ) ) {
+				return new String( $val );
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			} else {
 				return $val;
 			}
@@ -718,14 +935,24 @@ class Uri
 	/**
 	 * Returns the fragment.
 	 *
+<<<<<<< HEAD
 	 * @param  mixed default
 	 *
 	 * @return TeamSpeak3_Helper_String
+=======
+	 * @param  mixed $default
+	 *
+	 * @return String
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	 */
 	public function getFragment( $default = null )
 	{
 
+<<<<<<< HEAD
 		return ( $this->hasFragment() ) ? new TeamSpeak3_Helper_String( $this->fragment ) : $default;
+=======
+		return ( $this->hasFragment() ) ? new String( $this->fragment ) : $default;
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	}
 
 	/**

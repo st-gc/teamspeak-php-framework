@@ -82,11 +82,19 @@ class String implements \ArrayAccess, \Iterator, \Countable
 
 		$string = "";
 
+<<<<<<< HEAD
 		if( strlen( $hex ) % 2 == 1 ) {
 			throw new Exception( "given parameter '" . $hex . "' is not a valid hexadecimal number" );
 		}
 
 		foreach( str_split( $hex, 2 ) as $chunk ) {
+=======
+		if ( strlen( $hex ) % 2 == 1 ) {
+			throw new Exception( "given parameter '" . $hex . "' is not a valid hexadecimal number" );
+		}
+
+		foreach ( str_split( $hex, 2 ) as $chunk ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			$string .= chr( hexdec( $chunk ) );
 		}
 
@@ -106,7 +114,11 @@ class String implements \ArrayAccess, \Iterator, \Countable
 
 		$args = array_reverse( $args, true );
 
+<<<<<<< HEAD
 		foreach( $args as $key => $val ) {
+=======
+		foreach ( $args as $key => $val ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			$args[ $char . $key ] = $val;
 			unset( $args[ $key ] );
 		}
@@ -219,7 +231,11 @@ class String implements \ArrayAccess, \Iterator, \Countable
 
 		$parts = explode( $separator, $this->string, ( $limit ) ? intval( $limit ) : $this->count() );
 
+<<<<<<< HEAD
 		foreach( $parts as $key => $val ) {
+=======
+		foreach ( $parts as $key => $val ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			$parts[ $key ] = new self( $val );
 		}
 
@@ -283,6 +299,7 @@ class String implements \ArrayAccess, \Iterator, \Countable
 		$first = intval( $first );
 		$last  = intval( $last );
 
+<<<<<<< HEAD
 		if( $first > $total ) {
 			return null;
 		}
@@ -290,6 +307,17 @@ class String implements \ArrayAccess, \Iterator, \Countable
 
 		for( $i = 0; $i < $total; $i++ ) {
 			if( $i < $first || $i > $last ) {
+=======
+		if ( $first > $total ) {
+			return null;
+		}
+		if ( $first > $last ) {
+			$last = $first;
+		}
+
+		for ( $i = 0; $i < $total; $i++ ) {
+			if ( $i < $first || $i > $last ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 				unset( $sections[ $i ] );
 			}
 		}
@@ -312,9 +340,15 @@ class String implements \ArrayAccess, \Iterator, \Countable
 
 		$chars = ( $size - $this->count() );
 
+<<<<<<< HEAD
 		if( $chars < 0 ) {
 			$this->string = substr( $this->string, 0, $chars );
 		} elseif( $chars > 0 ) {
+=======
+		if ( $chars < 0 ) {
+			$this->string = substr( $this->string, 0, $chars );
+		} elseif ( $chars > 0 ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			$this->string = str_pad( $this->string, $size, strval( $char ) );
 		}
 
@@ -342,7 +376,11 @@ class String implements \ArrayAccess, \Iterator, \Countable
 	public function escape()
 	{
 
+<<<<<<< HEAD
 		foreach( Constant::getEscapePatterns() as $search => $replace ) {
+=======
+		foreach ( Constant::getEscapePatterns() as $search => $replace ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			$this->string = str_replace( $search, $replace, $this->string );
 		}
 
@@ -423,11 +461,19 @@ class String implements \ArrayAccess, \Iterator, \Countable
 	public function contains( $pattern, $regexp = false )
 	{
 
+<<<<<<< HEAD
 		if( empty( $pattern ) ) {
 			return true;
 		}
 
 		if( $regexp ) {
+=======
+		if ( empty( $pattern ) ) {
+			return true;
+		}
+
+		if ( $regexp ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			return ( preg_match( "/" . $pattern . "/i", $this->string ) ) ? true : false;
 		} else {
 			return ( stristr( $this->string, $pattern ) !== false ) ? true : false;
@@ -443,7 +489,11 @@ class String implements \ArrayAccess, \Iterator, \Countable
 	public function toInt()
 	{
 
+<<<<<<< HEAD
 		if( $this->string == pow( 2, 63 ) || $this->string == pow( 2, 64 ) ) {
+=======
+		if ( $this->string == pow( 2, 63 ) || $this->string == pow( 2, 64 ) ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			return -1;
 		}
 
@@ -504,7 +554,11 @@ class String implements \ArrayAccess, \Iterator, \Countable
 
 		$hex = "";
 
+<<<<<<< HEAD
 		foreach( $this as $char ) {
+=======
+		foreach ( $this as $char ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			$hex .= $char->toHex();
 		}
 
@@ -764,7 +818,11 @@ class String implements \ArrayAccess, \Iterator, \Countable
 	public function replace( $search, $replace, $caseSensitivity = true )
 	{
 
+<<<<<<< HEAD
 		if( $caseSensitivity ) {
+=======
+		if ( $caseSensitivity ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			$this->string = str_replace( $search, $replace, $this->string );
 		} else {
 			$this->string = str_ireplace( $search, $replace, $this->string );
@@ -781,7 +839,11 @@ class String implements \ArrayAccess, \Iterator, \Countable
 	public function toUtf8()
 	{
 
+<<<<<<< HEAD
 		if( !$this->isUtf8() ) {
+=======
+		if ( !$this->isUtf8() ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			$this->string = utf8_encode( $this->string );
 		}
 
@@ -844,12 +906,21 @@ class String implements \ArrayAccess, \Iterator, \Countable
 	public function __call( $function, $args )
 	{
 
+<<<<<<< HEAD
 		if( !function_exists( $function ) ) {
 			throw new Exception( "cannot call undefined function '" . $function . "' on this object" );
 		}
 
 		if( count( $args ) ) {
 			if( ( $key = array_search( $this, $args, true ) ) !== false ) {
+=======
+		if ( !function_exists( $function ) ) {
+			throw new Exception( "cannot call undefined function '" . $function . "' on this object" );
+		}
+
+		if ( count( $args ) ) {
+			if ( ( $key = array_search( $this, $args, true ) ) !== false ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 				$args[ $key ] = $this->string;
 			} else {
 				throw new Exception( "cannot call undefined function '" . $function . "' without the " . __CLASS__ . " object parameter" );
@@ -860,7 +931,11 @@ class String implements \ArrayAccess, \Iterator, \Countable
 			$return = call_user_func( $function, $this->string );
 		}
 
+<<<<<<< HEAD
 		if( is_string( $return ) ) {
+=======
+		if ( is_string( $return ) ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			$this->string = $return;
 		} else {
 			return $return;
@@ -949,7 +1024,13 @@ class String implements \ArrayAccess, \Iterator, \Countable
 	public function offsetSet( $offset, $value )
 	{
 
+<<<<<<< HEAD
 		if( !$this->offsetExists( $offset ) ) return;
+=======
+		if ( !$this->offsetExists( $offset ) ) {
+			return;
+		}
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 
 		$this->string{$offset} = strval( $value );
 	}
@@ -960,7 +1041,13 @@ class String implements \ArrayAccess, \Iterator, \Countable
 	public function offsetUnset( $offset )
 	{
 
+<<<<<<< HEAD
 		if( !$this->offsetExists( $offset ) ) return;
+=======
+		if ( !$this->offsetExists( $offset ) ) {
+			return;
+		}
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 
 		$this->string = substr_replace( $this->string, "", $offset, 1 );
 	}

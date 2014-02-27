@@ -12,12 +12,8 @@ namespace TeamSpeak\Exception;
 use TeamSpeak\Exception;
 
 /**
- * Enhanced exception class for TeamSpeak objects.
+ * Enhanced exception class for TeamSpeak models.
  */
-<<<<<<< HEAD
-class TransportException extends Exception { }
-=======
-class TransportException extends Exception
+class ModelException extends Exception
 {
 }
->>>>>>> f7b249fce37146989d856c68805f7af6899819e8

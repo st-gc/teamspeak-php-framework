@@ -12,6 +12,10 @@ namespace TeamSpeak\Transport;
 use TeamSpeak\Adapter\AbstractAdapter;
 use TeamSpeak\Exception\TransportException;
 use TeamSpeak\Model\String;
+<<<<<<< HEAD
+=======
+use TeamSpeak\Model\Signal;
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 
 /**
  * @class AbstractTransport
@@ -52,6 +56,7 @@ abstract class AbstractTransport
 	public function __construct( array $config )
 	{
 
+<<<<<<< HEAD
 		if( !array_key_exists( "host", $config ) ) {
 			throw new TransportException( "config must have a key for 'host' which specifies the server host name" );
 		}
@@ -65,6 +70,21 @@ abstract class AbstractTransport
 		}
 
 		if( !array_key_exists( "blocking", $config ) ) {
+=======
+		if ( !array_key_exists( "host", $config ) ) {
+			throw new TransportException( "config must have a key for 'host' which specifies the server host name" );
+		}
+
+		if ( !array_key_exists( "port", $config ) ) {
+			throw new TransportException( "config must have a key for 'port' which specifies the server port number" );
+		}
+
+		if ( !array_key_exists( "timeout", $config ) ) {
+			$config[ "timeout" ] = 10;
+		}
+
+		if ( !array_key_exists( "blocking", $config ) ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			$config[ "blocking" ] = 1;
 		}
 
@@ -109,7 +129,11 @@ abstract class AbstractTransport
 	public function __destruct()
 	{
 
+<<<<<<< HEAD
 		if( $this->adapter instanceof AbstractAdapter ) {
+=======
+		if ( $this->adapter instanceof AbstractAdapter ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			$this->adapter->__destruct();
 		}
 
@@ -164,7 +188,11 @@ abstract class AbstractTransport
 	public function getConfig( $key = null, $default = null )
 	{
 
+<<<<<<< HEAD
 		if( $key !== null ) {
+=======
+		if ( $key !== null ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			return array_key_exists( $key, $this->config ) ? $this->config[ $key ] : $default;
 		}
 
@@ -193,7 +221,11 @@ abstract class AbstractTransport
 	public function getMetaData()
 	{
 
+<<<<<<< HEAD
 		if( $this->stream === null ) {
+=======
+		if ( $this->stream === null ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			throw new TransportException( "unable to retrieve header/meta data from stream pointer" );
 		}
 
@@ -211,7 +243,11 @@ abstract class AbstractTransport
 	protected function waitForReadyRead( $time = 0 )
 	{
 
+<<<<<<< HEAD
 		if( !$this->isConnected() || $this->config[ "blocking" ] ) {
+=======
+		if ( !$this->isConnected() || $this->config[ "blocking" ] ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			return;
 		}
 
@@ -219,8 +255,13 @@ abstract class AbstractTransport
 			$read = array( $this->stream );
 			$null = null;
 
+<<<<<<< HEAD
 			if( $time ) {
 				TeamSpeak3_Helper_Signal::getInstance()->emit(
+=======
+			if ( $time ) {
+				Signal::getInstance()->emit(
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 					strtolower( $this->getAdapterType() ) . "WaitTimeout",
 					$time,
 					$this->getAdapter()
@@ -228,7 +269,11 @@ abstract class AbstractTransport
 			}
 
 			$time = $time + $this->config[ "timeout" ];
+<<<<<<< HEAD
 		} while( @stream_select( $read, $null, $null, $this->config[ "timeout" ] ) == 0 );
+=======
+		} while ( @stream_select( $read, $null, $null, $this->config[ "timeout" ] ) == 0 );
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 	}
 
 	/**
@@ -250,7 +295,11 @@ abstract class AbstractTransport
 	public function getAdapterType()
 	{
 
+<<<<<<< HEAD
 		if( $this->adapter instanceof AbstractAdapter ) {
+=======
+		if ( $this->adapter instanceof AbstractAdapter ) {
+>>>>>>> f7b249fce37146989d856c68805f7af6899819e8
 			$string = String::factory( get_class( $this->adapter ) );
 
 			return $string->substr( $string->findLast( "_" ) )->replace( array( "_", " " ), "" )->toString();
